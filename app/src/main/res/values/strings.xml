@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Moja Poslasticarnica</string>
+    <string name="poslasti_arnica_slatki_zalogaji">Poslastičarnica slatki zalogaji</string>
+    <string name="poslasticarnica_slatki_zalogaji">Poslastičarnica \nslatki zalogaji</string>
+    <string name="footer_text">Adresa: Trgovačka 25, 11000 Beograd \n Kontakt telefon: +38161762008 \n E-mail: poslasticarnicaslatkizalogaji@gmail.com</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF7DC"
+    tools:context=".fragments.ContactFragment">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="Lični podaci"
+        android:textColor="@color/black"
+        android:textSize="40dp" />
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="100dp"
+        android:text="Korisničko ime"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/usernamelabel"
+        android:layout_width="200dp"
+        android:layout_height="25dp"
+        android:layout_below="@id/username"
+        android:layout_centerInParent="true"
+        android:background="@color/white" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/usernamelabel"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:text="Ime"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/namelabel"
+        android:layout_width="200dp"
+        android:layout_height="25dp"
+        android:layout_below="@id/name"
+        android:layout_centerInParent="true"
+        android:background="@color/white" />
+    <TextView
+        android:id="@+id/lastname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/namelabel"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:text="Prezime"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/lastnamelabel"
+        android:layout_width="200dp"
+        android:layout_height="25dp"
+        android:layout_below="@id/lastname"
+        android:layout_centerInParent="true"
+        android:background="@color/white" />
+    <TextView
+        android:id="@+id/phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lastnamelabel"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:text="Kontakt telefon"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/phonelabel"
+        android:layout_width="200dp"
+        android:layout_height="25dp"
+        android:layout_below="@id/phone"
+        android:layout_centerInParent="true"
+        android:background="@color/white" />
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/phonelabel"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:text="Adresa"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/addresslabel"
+        android:layout_width="200dp"
+        android:layout_height="25dp"
+        android:layout_below="@id/address"
+        android:layout_centerInParent="true"
+        android:background="@color/white" />
+
+    <Button
+        android:id="@+id/personal_button"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/addresslabel"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="50dp"
+        android:background="#E8D159"
+        android:gravity="center"
+        android:text="Izmeni  lične  podatke"
+        android:textColor="@color/black"
+        android:textSize="12dp" />
+
+</RelativeLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Torte"
+        android:id="@+id/tortaItem"></item>
+    <item android:title="Kolaci"
+        android:id="@+id/kolaciItem"></item>
+    <item android:title="Korpa"
+        android:id="@+id/korpaItem"></item>
+    <item android:title="Kontakt"
+        android:id="@+id/kontaktItem"></item>
+</menu>
+

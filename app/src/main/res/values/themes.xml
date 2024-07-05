@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.MojaPoslasticarnica" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:fontFamily">@font/oregano_regular</item>
+    </style>
+
+    <style name="Theme.MojaPoslasticarnicaMain" parent="Theme.AppCompat.Light">
+        <item name="android:fontFamily">@font/oregano_regular</item>
+    </style>
+</resources>

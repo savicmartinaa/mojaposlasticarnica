@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.ContactFragment"
+    android:background="#FFF7DC">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/contact"
+        android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="Kontakt"
+        android:textSize="40dp" />
+
+    <View
+        android:id="@+id/picture"
+        android:layout_width="290dp"
+        android:layout_height="240dp"
+        android:background="@drawable/kontakt"
+        android:layout_below="@id/contact"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="90dp"
+        />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="390dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_height="100dp"
+        android:text="@string/footer_text"
+        android:textSize="24dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="40dp"
+        android:layout_below="@id/picture"
+       />
+
+
+</RelativeLayout>

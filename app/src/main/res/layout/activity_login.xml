@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="350dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="70dp"
+        android:gravity="center"
+        android:text="@string/poslasti_arnica_slatki_zalogaji"
+        android:textColor="@color/white"
+        android:textSize="45sp" />
+
+    <EditText
+        android:id="@+id/kor_ime"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="40dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:hint="Korisnicko ime"
+        android:textColor="#9A9A9A"
+        android:textSize="20dp"></EditText>
+
+    <EditText
+        android:id="@+id/lozinka"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="40dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:hint="Lozinka"
+        android:textColor="#9A9A9A"
+        android:textSize="20dp"></EditText>
+
+    <Button
+        android:id="@+id/button_login"
+        android:layout_width="141dp"
+        android:layout_height="50dp"
+        android:background="#D69008"
+        android:gravity="center"
+        android:text="Prijavite se"
+        android:textColor="@color/black"
+        android:textSize="15dp" />
+
+</LinearLayout>
