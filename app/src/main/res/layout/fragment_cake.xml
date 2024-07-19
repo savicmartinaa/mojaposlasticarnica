@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.ContactFragment"
+    android:background="#FFF7DC">
+
+    <TextView
+        android:id="@+id/text_view_torte_label"
+        android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="Torte"
+        android:textSize="40dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@+id/text_view_torte_label"
+        android:id="@+id/recyclerViewCakes"
+        android:layout_width="match_parent"
+        tools:listitem="@layout/item_sweet"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"/>
+
+
+
+
+</RelativeLayout>

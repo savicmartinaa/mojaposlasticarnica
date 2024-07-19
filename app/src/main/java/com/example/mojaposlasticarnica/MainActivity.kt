@@ -2,9 +2,7 @@ package com.example.mojaposlasticarnica
 
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
 import android.view.MenuInflater
-import android.view.MenuItem
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +10,7 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.mojaposlasticarnica.fragments.ContactFragment
+import com.example.mojaposlasticarnica.fragments.CakeFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +32,7 @@ class MainActivity : AppCompatActivity() {
             popup.setOnMenuItemClickListener { item ->
                 when (item.itemId) {
                         R.id.tortaItem -> {
-                            toastMessage("torta")
+                            ucitajTorteFragment()
                             true
 
                         }
@@ -62,6 +61,12 @@ class MainActivity : AppCompatActivity() {
             popup.show()
         }
 
+    }
+
+    private fun ucitajTorteFragment() {
+        val cakeFragment: Fragment = CakeFragment()
+        val ft: FragmentTransaction =supportFragmentManager.beginTransaction()
+        ft.replace(R.id.fl_content, cakeFragment).commit()
     }
 
     fun toastMessage(message: String) {
