@@ -3,9 +3,12 @@ package com.example.mojaposlasticarnica
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.mojaposlasticarnica.fragments.ContactFragment
@@ -16,37 +19,49 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
+        setupMenu()
+
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        super.onCreateOptionsMenu(menu);
-        val menuInflater = menuInflater
-        menuInflater.inflate(R.menu.menu, menu)
-        return true
-    }
+    private fun setupMenu() {
+        val menuButton: ImageButton = findViewById(R.id.menuButton)
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        menuButton.setOnClickListener {
+            val popup = PopupMenu(this, menuButton)
+            val inflater: MenuInflater = popup.menuInflater
+            inflater.inflate(R.menu.menu, popup.menu)
+            popup.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                        R.id.tortaItem -> {
+                            toastMessage("torta")
+                            true
 
-        when (item.itemId) {
-            R.id.tortaItem -> {
-                toastMessage("torta")
+                        }
+
+                        R.id.kolaciItem -> {
+                            toastMessage("kolaciItem")
+                            true
+
+
+                        }
+
+                        R.id.kontaktItem -> {
+                            ucitajKontaktFragment()
+                            true
+
+                        }
+
+                        R.id.korpaItem -> {
+                            toastMessage("korpaItem")
+                            true
+
+                        }
+                    else -> false
+                }
             }
-
-            R.id.kolaciItem -> {
-                toastMessage("kolaciItem")
-
-            }
-
-            R.id.kontaktItem -> {
-                ucitajKontaktFragment()
-
-            }
-
-            R.id.korpaItem -> {
-                toastMessage("korpaItem")
-            }
+            popup.show()
         }
-        return super.onOptionsItemSelected(item)
+
     }
 
     fun toastMessage(message: String) {
