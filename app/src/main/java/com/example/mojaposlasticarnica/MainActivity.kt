@@ -3,6 +3,8 @@ package com.example.mojaposlasticarnica
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuInflater
+import android.view.MenuItem
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -11,15 +13,37 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.mojaposlasticarnica.fragments.ContactFragment
 import com.example.mojaposlasticarnica.fragments.CakeFragment
+import com.example.mojaposlasticarnica.fragments.CartFragment
+import com.example.mojaposlasticarnica.fragments.NotificationFragment
+import com.example.mojaposlasticarnica.fragments.PersonalDataFragment
+import com.example.mojaposlasticarnica.fragments.SweetsFragment
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var notificationFragment: NotificationFragment
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         setupMenu()
 
+        notificationFragment = NotificationFragment()
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fl_content, notificationFragment)
+            .commit()
+
+
+        val buttonPersonalData: ImageButton = findViewById(R.id.button1)
+        val buttonNotifications: ImageButton = findViewById(R.id.button2)
+
+        buttonPersonalData.setOnClickListener {
+            showPersonalDataFragment()
+        }
+
+        buttonNotifications.setOnClickListener {
+            showNotificationsFragment()
+        }
     }
 
     private fun setupMenu() {
@@ -38,7 +62,7 @@ class MainActivity : AppCompatActivity() {
                         }
 
                         R.id.kolaciItem -> {
-                            toastMessage("kolaciItem")
+                            ucitajKolaciFragment()
                             true
 
 
@@ -51,7 +75,7 @@ class MainActivity : AppCompatActivity() {
                         }
 
                         R.id.korpaItem -> {
-                            toastMessage("korpaItem")
+                            ucitajKorpaFragment()
                             true
 
                         }
@@ -69,7 +93,47 @@ class MainActivity : AppCompatActivity() {
         ft.replace(R.id.fl_content, cakeFragment).commit()
     }
 
-    fun toastMessage(message: String) {
+    private fun ucitajKolaciFragment() {
+        val sweetFragment: Fragment = SweetsFragment()
+        val ft: FragmentTransaction =supportFragmentManager.beginTransaction()
+        ft.replace(R.id.fl_content, sweetFragment).commit()
+    }
+
+    private fun ucitajKorpaFragment() {
+        val cartFragment: Fragment = CartFragment()
+        val ft: FragmentTransaction =supportFragmentManager.beginTransaction()
+        ft.replace(R.id.fl_content, cartFragment).commit()
+    }
+
+    fun ucitajKontaktFragment(){
+        val newFragment: Fragment = ContactFragment()
+        val ft: FragmentTransaction =supportFragmentManager.beginTransaction()
+        ft.replace(R.id.fl_content, newFragment).commit()
+    }
+
+
+    private fun showPersonalDataFragment() {
+        val fragment = PersonalDataFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fl_content, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
+    private fun showNotificationsFragment() {
+        val fragment = NotificationFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fl_content, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
+    fun getNotificationFragment(): NotificationFragment {
+        return notificationFragment
+    }
+
+
+    /*fun toastMessage(message: String) {
         Toast.makeText(baseContext, message, Toast.LENGTH_SHORT).show()
     }
 
@@ -101,14 +165,6 @@ class MainActivity : AppCompatActivity() {
     override fun onRestart() {
         super.onRestart();
         Log.i("poruka", "on restart method");
-    }
-
-    fun ucitajKontaktFragment(){
-        val newFragment: Fragment = ContactFragment()
-        val ft: FragmentTransaction =supportFragmentManager.beginTransaction()
-        ft.replace(R.id.fl_content, newFragment).commit()
-    }
-
-
+    }*/
 }
 

@@ -34,7 +34,6 @@
         android:layout_below="@id/username"
         android:layout_centerInParent="true"
         android:background="@color/white"
-        android:text="makica25"
         android:gravity="center"/>
 
     <TextView
@@ -55,8 +54,8 @@
         android:layout_below="@id/name"
         android:layout_centerInParent="true"
         android:background="@color/white"
-        android:gravity="center"
-        android:text="Marija"/>
+        android:gravity="center" />
+
     <TextView
         android:id="@+id/lastname"
         android:layout_width="wrap_content"
@@ -75,8 +74,7 @@
         android:layout_below="@id/lastname"
         android:layout_centerInParent="true"
         android:background="@color/white"
-        android:gravity="center"
-        android:text="Simic"/>
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/phone"
@@ -96,8 +94,7 @@
         android:layout_below="@id/phone"
         android:layout_centerInParent="true"
         android:background="@color/white"
-        android:gravity="center"
-        android:text="0628945786"/>
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/address"
@@ -117,8 +114,7 @@
         android:layout_below="@id/address"
         android:layout_centerInParent="true"
         android:background="@color/white"
-        android:gravity="center"
-        android:text="Vojvode Misica 15, Novi Sad"/>
+        android:gravity="center" />
 
     <Button
         android:id="@+id/personal_button"
@@ -137,7 +133,7 @@
         android:id="@+id/password_button"
         android:layout_width="150dp"
         android:layout_height="30dp"
-       android:layout_toRightOf="@id/personal_button"
+        android:layout_toRightOf="@id/personal_button"
         android:layout_below="@id/addresslabel"
         android:layout_marginTop="40dp"
         android:layout_marginLeft="40dp"

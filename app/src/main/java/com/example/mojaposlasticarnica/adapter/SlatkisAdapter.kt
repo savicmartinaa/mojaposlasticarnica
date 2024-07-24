@@ -19,7 +19,7 @@ class SlatkisAdapter(private val slatkisList: List<Slatkis>) : RecyclerView.Adap
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_sweet, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_sweet_sale, parent, false)
         return ViewHolder(view)
     }
 
@@ -33,10 +33,7 @@ class SlatkisAdapter(private val slatkisList: List<Slatkis>) : RecyclerView.Adap
             holder.textViewCenaSaPopustom.visibility = View.GONE
 
         holder.imageViewSlika.setImageResource(slatkis.slika)
-        // Load the image using Glide or any other image loading library
-      /*  Glide.with(holder.itemView.context)
-            .load(slatkis.slika)
-            .into(holder.imageViewSlika)*/
+
     }
 
     override fun getItemCount() = slatkisList.size

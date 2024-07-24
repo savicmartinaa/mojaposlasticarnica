@@ -5,32 +5,53 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.mojaposlasticarnica.R
+import com.example.mojaposlasticarnica.adapter.NotificationAdapter
+import com.example.mojaposlasticarnica.model.Obavestenje
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-
-
-/**
- * A simple [Fragment] subclass.
- * Use the [NotificationFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class NotificationFragment : Fragment() {
 
+    private val obavestenja = mutableListOf<Obavestenje>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-        }
-    }
-
+    private lateinit var adapter: NotificationAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val inflatedView = inflater.inflate(R.layout.fragment_notification, container, false)
+
+        val recyclerView = inflatedView?.findViewById<RecyclerView>(R.id.recyclerViewNotifications)
+
+
+        // Sample data
+        obavestenja.addAll(
+            listOf(
+                Obavestenje("Uspešno ste poručili proizvode iz korpe.", "2024-07-24"),
+                Obavestenje("Uspešno ste poručili proizvode iz korpe.", "2024-07-04")
+            )
+        )
+
+
+        // Set up the RecyclerView
+        recyclerView?.let {
+            it.layoutManager = LinearLayoutManager(activity)
+            it.adapter = NotificationAdapter(obavestenja)
+        }
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notification, container, false)
+        return inflatedView
+    }
+
+    fun dodajObavestenje(opis: String) {
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val currentDate = sdf.format(Date())
+        val novoObavestenje = Obavestenje(opis, currentDate)
+        obavestenja.add(0, novoObavestenje) // Add to the top of the list
+        adapter.notifyItemInserted(0)
     }
 
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:background="#9A9A9A"
+    >
+
+    <RelativeLayout
+        android:layout_marginLeft="24dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/obavestenje"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:text="Obaveštenje"
+            android:textSize="20dp" />
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/datum"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/obavestenje"
+            android:text="Datum"
+            android:textSize="20dp" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

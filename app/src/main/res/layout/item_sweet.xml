@@ -7,7 +7,7 @@
 
     <ImageView
         android:id="@+id/imageViewSlika"
-        android:layout_width="140dp"
+        android:layout_width="150dp"
         android:layout_height="140dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_launcher_background" />
@@ -24,25 +24,19 @@
             android:id="@+id/textViewIme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
             android:text="Ime"
-            android:textSize="24sp" />
+            android:textSize="40sp" />
 
         <TextView
             android:textColor="@color/orange_main"
             android:id="@+id/textViewCena"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
             android:text="Cena"
-            android:textSize="24sp" />
+            android:textSize="40sp" />
 
-        <TextView
-            android:layout_marginStart="24dp"
-            android:textColor="@color/color_red"
-            android:id="@+id/textViewCenaSaPopustom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cena sa Popustom"
-            android:textSize="24sp" />
     </LinearLayout>
 
 

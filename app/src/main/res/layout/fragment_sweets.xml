@@ -7,20 +7,20 @@
     android:background="@drawable/background">
 
     <TextView
-        android:id="@+id/text_view_torte_label"
+        android:id="@+id/text_view_kolaci_label"
         android:layout_width="match_parent"
         android:textColor="#FFEBA5"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:gravity="center"
-        android:text="Torte"
+        android:text="Kolači"
         android:textSize="60dp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@+id/text_view_torte_label"
-        android:id="@+id/recyclerViewCakes"
+        android:layout_below="@+id/text_view_kolaci_label"
+        android:id="@+id/recyclerViewSweets"
         android:layout_width="match_parent"
-        tools:listitem="@layout/item_sweet_sale"
+        tools:listitem="@layout/item_sweet"
         android:layout_height="match_parent"
         android:layout_margin="16dp"/>
 

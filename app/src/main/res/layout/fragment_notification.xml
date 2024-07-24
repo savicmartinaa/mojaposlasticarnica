@@ -15,4 +15,13 @@
         android:gravity="center"
         android:text="Obaveštenja"
         android:textSize="40dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@+id/notification"
+        android:id="@+id/recyclerViewNotifications"
+        android:layout_width="match_parent"
+        tools:listitem="@layout/item_notification"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"/>
+
 </RelativeLayout>
