@@ -33,6 +33,9 @@ class SlatkisAdapter(private val slatkisList: List<Slatkis>) : RecyclerView.Adap
             holder.textViewCenaSaPopustom.visibility = View.GONE
 
         holder.imageViewSlika.setImageResource(slatkis.slika)
+        holder.itemView.setOnClickListener {
+
+        }
 
     }
 

@@ -1,8 +1,8 @@
 package com.example.mojaposlasticarnica.model
 
 data class KorpaProizvod (
-    val slika: Int,
-    val naziv: String,
-    val kolicina: Int,
-    val cena: String
+    var slika: Int,
+    var naziv: String,
+    var kolicina: Int,
+    var cena: String
 )

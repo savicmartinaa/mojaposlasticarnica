@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.mojaposlasticarnica.data.SharedPreferencesHelper
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,8 +33,10 @@ class LoginActivity : AppCompatActivity() {
         val korisnicko_ime =
             findViewById<EditText>(R.id.kor_ime)
         val lozinka = findViewById<EditText>(R.id.lozinka)
-        if (korisnicko_ime.getText().toString() == "admin" && lozinka.getText()
-                .toString() == "admin123"
+
+        val sacuvaniKorisnik = SharedPreferencesHelper(this).getKorisnik()
+        if (sacuvaniKorisnik != null && korisnicko_ime.text.toString() == sacuvaniKorisnik.korisnickoIme && lozinka.text
+                .toString() == sacuvaniKorisnik.lozinka
         ) {
             otvoriMainActivity()
         } else {

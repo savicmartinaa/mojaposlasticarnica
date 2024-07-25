@@ -8,10 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import com.example.mojaposlasticarnica.LoginActivity
 import com.example.mojaposlasticarnica.MainActivity
 import com.example.mojaposlasticarnica.R
+import com.example.mojaposlasticarnica.data.SharedPreferencesHelper
+import com.example.mojaposlasticarnica.model.Obavestenje
+import com.example.mojaposlasticarnica.utils.getCurrentDate
 
 class ChangePasswordFragment : Fragment() {
     override fun onCreateView(
@@ -24,6 +28,16 @@ class ChangePasswordFragment : Fragment() {
 
 
         buttonChangePassword.setOnClickListener {
+
+            //Uradi: proveri prvo pre ovoga da li je password identican sa onim u memoriji
+
+            SharedPreferencesHelper(requireContext()).addObavestenje(Obavestenje("Uspešno ste izmenili lozinku.", getCurrentDate()))
+            val korisnik  = SharedPreferencesHelper(requireContext()).getKorisnik()
+            korisnik?.let {
+                it.lozinka = view.findViewById<EditText>(R.id.newpasswordlabel).text.toString()
+                SharedPreferencesHelper(requireContext()).saveKorisnik(it)
+            }
+
             showPasswordChangeDialog()
         }
 

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mojaposlasticarnica.R
 import com.example.mojaposlasticarnica.adapter.NotificationAdapter
+import com.example.mojaposlasticarnica.data.SharedPreferencesHelper
 import com.example.mojaposlasticarnica.model.Obavestenje
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -30,10 +31,7 @@ class NotificationFragment : Fragment() {
 
         // Sample data
         obavestenja.addAll(
-            listOf(
-                Obavestenje("Uspešno ste poručili proizvode iz korpe.", "2024-07-24"),
-                Obavestenje("Uspešno ste poručili proizvode iz korpe.", "2024-07-04")
-            )
+            SharedPreferencesHelper(requireContext()).getObavestenja()
         )
 
 
