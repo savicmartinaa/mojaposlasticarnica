@@ -35,6 +35,9 @@ class SweetsFragment : Fragment() {
         recyclerView?.let {
             it.layoutManager = LinearLayoutManager(activity)
             it.adapter = SlatkisAdapter(slatkisi)
+            { slatkis ->
+                //openDetailsFragment(slatkis)
+            }
         }
         return inflatedView
     }

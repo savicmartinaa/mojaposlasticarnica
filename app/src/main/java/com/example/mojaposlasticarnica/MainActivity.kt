@@ -16,11 +16,14 @@ import com.example.mojaposlasticarnica.fragments.CakeFragment
 import com.example.mojaposlasticarnica.fragments.CartFragment
 import com.example.mojaposlasticarnica.fragments.NotificationFragment
 import com.example.mojaposlasticarnica.fragments.PersonalDataFragment
+import com.example.mojaposlasticarnica.fragments.PromotionsFragment
 import com.example.mojaposlasticarnica.fragments.SweetsFragment
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var notificationFragment: NotificationFragment
+
+    private lateinit var initialFragment: PromotionsFragment
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -28,9 +31,11 @@ class MainActivity : AppCompatActivity() {
         setupMenu()
 
         notificationFragment = NotificationFragment()
+        initialFragment = PromotionsFragment()
+
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fl_content, notificationFragment)
+            .replace(R.id.fl_content, initialFragment)
             .commit()
 
 

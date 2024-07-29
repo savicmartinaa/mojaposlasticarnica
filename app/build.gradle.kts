@@ -61,6 +61,9 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.recyclerview)
     implementation("com.google.code.gson:gson:2.10.1")
+    implementation("androidx.viewpager2:viewpager2:1.1.0")
+    implementation("com.google.android.material:material:1.1.0-alpha10")
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mojaposlasticarnica.R
@@ -29,10 +30,18 @@ class CakeFragment : Fragment() {
         // Set up the RecyclerView
         recyclerView?.let {
             it.layoutManager = LinearLayoutManager(activity)
-            it.adapter = SlatkisAdapter(torte)
+            it.adapter = SlatkisAdapter(torte){ slatkis ->
+                openDetailsFragment(slatkis)
+            }
         }
         // Inflate the layout for this fragment
         return inflatedView
+    }
+
+    private fun openDetailsFragment(slatkis: Slatkis) {
+        val fragment = ProductFragment.newInstance(slatkis)
+        val ft: FragmentTransaction =parentFragmentManager.beginTransaction()
+        ft.add(R.id.fl_content, fragment).commit()
     }
 
 }

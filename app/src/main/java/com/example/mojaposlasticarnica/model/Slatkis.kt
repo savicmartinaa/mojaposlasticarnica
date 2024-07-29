@@ -5,5 +5,11 @@ data class Slatkis(
     var cena: Int,
     var valuta: String,
     var cenaSaPopustom: Int = 0,
-    var slika: Int
-)
+    var slika: Int,
+    var opisProizvoda: String = ""
+){
+    fun isThereAPopust():Boolean{
+        return if (cenaSaPopustom>0 && cenaSaPopustom<cena) true
+        else false
+    }
+}

@@ -30,9 +30,9 @@ class SharedPreferencesHelper(context: Context) {
         if (isFirstLaunch) {
             // Predefined list of torte
             val torte = listOf(
-                Slatkis("Badem torta", 570, "RSD", 480, R.drawable.badem),
-                Slatkis("Oreo torta", 520, "RSD", 450, R.drawable.oreo),
-                Slatkis("Kapri torta", 700, "RSD", 650, R.drawable.kapri),
+                Slatkis("Badem torta", 570, "RSD", 570, R.drawable.badem, opisProizvoda = "fndsafnksjn"),
+                Slatkis("Oreo torta", 520, "RSD", 450, R.drawable.oreo, "dfhdsfkads"),
+                Slatkis("Kapri torta", 700, "RSD", 0, R.drawable.kapri),
                 Slatkis("Beli anđeo torta", 520, "RSD", 450, R.drawable.beli_andjeo),
                 Slatkis("Baron torta", 600, "RSD", 550, R.drawable.baron),
                 Slatkis("Cheese cake", 700, "RSD", 650, R.drawable.cheese_cake)

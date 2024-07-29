@@ -7,8 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import com.example.mojaposlasticarnica.R
+import com.example.mojaposlasticarnica.data.SharedPreferencesHelper
+import com.example.mojaposlasticarnica.model.Korisnik
 
 
 /**
@@ -18,17 +21,34 @@ import com.example.mojaposlasticarnica.R
  */
 class PersonalDataFragment : Fragment() {
 
+    var korisnik: Korisnik? =  null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_personal_data, container, false)
+         korisnik =  SharedPreferencesHelper(requireContext()).getKorisnik()
+
+
+        val editTextIme: EditText = view.findViewById(R.id.usernamelabel)
+        korisnik?.let {
+            editTextIme.setText(it.ime)
+
+        }
 
         val buttonEditPersonalData: Button = view.findViewById(R.id.personal_button)
         val buttonChangePassword: Button = view.findViewById(R.id.password_button)
 
         buttonEditPersonalData.setOnClickListener {
-            navigateToFragment(EditPersonalDataFragment())
+           //TODO: uzmes sve podatke iz view-a i sacuvas u SharedPrefs
+            val korisnickoIme = editTextIme.text.toString()
+            korisnik?.let {
+                val noviKorisnik = Korisnik(korisnickoIme = korisnickoIme, lozinka = it.lozinka,"","", "", "")
+                SharedPreferencesHelper(requireContext()).saveKorisnik(noviKorisnik)
+            }
+
+
         }
 
         buttonChangePassword.setOnClickListener {
