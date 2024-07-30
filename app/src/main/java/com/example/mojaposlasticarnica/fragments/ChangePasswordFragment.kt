@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.mojaposlasticarnica.LoginActivity
 import com.example.mojaposlasticarnica.MainActivity
@@ -27,7 +28,7 @@ class ChangePasswordFragment : Fragment() {
         val buttonChangePassword: Button = view.findViewById(R.id.change_password)
 
 
-        buttonChangePassword.setOnClickListener {
+       /* buttonChangePassword.setOnClickListener {
 
             //Uradi: proveri prvo pre ovoga da li je password identican sa onim u memoriji
 
@@ -35,10 +36,54 @@ class ChangePasswordFragment : Fragment() {
             val korisnik  = SharedPreferencesHelper(requireContext()).getKorisnik()
             korisnik?.let {
                 it.lozinka = view.findViewById<EditText>(R.id.newpasswordlabel).text.toString()
-                SharedPreferencesHelper(requireContext()).saveKorisnik(it)
+                if(it.lozinka != korisnik.lozinka) {
+                    SharedPreferencesHelper(requireContext()).saveKorisnik(it)
+                }
             }
-
             showPasswordChangeDialog()
+            val myIntent: Intent = Intent(requireContext(), MainActivity::class.java)
+            startActivity(myIntent)
+        }
+
+        return view
+    }*/
+
+        buttonChangePassword.setOnClickListener {
+            val sharedPreferencesHelper = SharedPreferencesHelper(requireContext())
+
+            // Preuzimanje korisnika iz SharedPreferences
+            val korisnik = sharedPreferencesHelper.getKorisnik()
+
+            korisnik?.let {
+                // Uneta stara lozinka
+                val oldPassword = view.findViewById<EditText>(R.id.oldpasswordlabel).text.toString()
+
+                // Uneta nova lozinka
+                val newPassword = view.findViewById<EditText>(R.id.newpasswordlabel).text.toString()
+
+                // Provera da li je uneta stara lozinka ispravna
+                if (it.lozinka == oldPassword) {
+                    // Provera da li se nova lozinka razlikuje od stare lozinke
+                    if (it.lozinka != newPassword) {
+                        it.lozinka = newPassword
+                        sharedPreferencesHelper.saveKorisnik(it)
+
+                        sharedPreferencesHelper.addObavestenje(Obavestenje("Uspešno ste izmenili lozinku.", getCurrentDate()))
+
+                        showPasswordChangeDialog()
+
+                        val myIntent = Intent(requireContext(), LoginActivity::class.java)
+                        startActivity(myIntent)
+                        requireActivity().finish() // Završava trenutnu aktivnost da bi se osiguralo vraćanje na LoginActivity
+                    } else {
+                        // Nova lozinka se poklapa sa starom
+                        Toast.makeText(requireContext(), "Nova lozinka ne može biti ista kao stara lozinka.", Toast.LENGTH_LONG).show()
+                    }
+                } else {
+                    // Stara lozinka nije ispravna
+                    Toast.makeText(requireContext(), "Pogrešna stara lozinka.", Toast.LENGTH_LONG).show()
+                }
+            }
         }
 
         return view
@@ -60,11 +105,4 @@ class ChangePasswordFragment : Fragment() {
         val notificationFragment = (activity as? MainActivity)?.getNotificationFragment()
         notificationFragment?.dodajObavestenje("Uspešno ste promenili lozinku.")
     }
-
-    /*private fun navigateToLoginActivity() {
-        val intent = Intent(activity, LoginActivity::class.java)
-        startActivity(intent)
-        activity?.finish() // Završava trenutnu aktivnost
-    }*/
-
 }

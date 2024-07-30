@@ -25,7 +25,7 @@ class NotificationAdapter(private val obavestenjaList: List<Obavestenje>) : Recy
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val notification = obavestenjaList[position]
         holder.textViewObavestenje.text = notification.obavestenje
-        holder.textViewDatum.text = notification.datum.toString()
+        holder.textViewDatum.text = notification.datum
     }
 
     override fun getItemCount() = obavestenjaList.size

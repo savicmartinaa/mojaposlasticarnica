@@ -3,6 +3,7 @@ package com.example.mojaposlasticarnica.data
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.mojaposlasticarnica.R
+import com.example.mojaposlasticarnica.model.Komentar
 import com.example.mojaposlasticarnica.model.Korisnik
 import com.example.mojaposlasticarnica.model.Obavestenje
 import com.example.mojaposlasticarnica.model.Slatkis
@@ -22,6 +23,7 @@ class SharedPreferencesHelper(context: Context) {
         private const val KEY_KOLACI = "com.example.mojaposlasticarnica.KOLACI"
         private const val KEY_KORISNIK = "com.example.mojaposlasticarnica.KORISNIK"
         private const val KEY_FIRST_LAUNCH = "com.example.mojaposlasticarnica.FIRST_LAUNCH"
+        private const val KEY_KOMENTARI = "com.example.mojaposlasticarnica.KOMENTARI"
     }
 
     // Initialize the data if it's the first launch
@@ -30,12 +32,12 @@ class SharedPreferencesHelper(context: Context) {
         if (isFirstLaunch) {
             // Predefined list of torte
             val torte = listOf(
-                Slatkis("Badem torta", 570, "RSD", 570, R.drawable.badem, opisProizvoda = "fndsafnksjn"),
+                Slatkis("Badem torta", 570, "RSD", 480, R.drawable.badem, opisProizvoda = "fndsafnksjn"),
                 Slatkis("Oreo torta", 520, "RSD", 450, R.drawable.oreo, "dfhdsfkads"),
-                Slatkis("Kapri torta", 700, "RSD", 0, R.drawable.kapri),
+                Slatkis("Kapri torta", 540, "RSD", 540, R.drawable.kapri),
                 Slatkis("Beli anđeo torta", 520, "RSD", 450, R.drawable.beli_andjeo),
-                Slatkis("Baron torta", 600, "RSD", 550, R.drawable.baron),
-                Slatkis("Cheese cake", 700, "RSD", 650, R.drawable.cheese_cake)
+                Slatkis("Baron torta", 540, "RSD", 540, R.drawable.baron),
+                Slatkis("Cheese cake", 540, "RSD", 540, R.drawable.cheese_cake)
             )
             saveList(KEY_TORTE, torte)
 
@@ -48,11 +50,11 @@ class SharedPreferencesHelper(context: Context) {
 
             // Predefined list of kolaci
             val kolaci = listOf(
-                Slatkis("Beli kolac", 562, "RSD", 555, R.drawable.belikolac),
-                Slatkis("Tri leće kolac", 562, "RSD", 555, R.drawable.trilece),
-                Slatkis("Malina kolac", 562, "RSD", 555, R.drawable.malinakolac),
-                Slatkis("Princes krofna", 562, "RSD", 555, R.drawable.princeskrofna),
-                Slatkis("Krempita", 562, "RSD", 555, R.drawable.krempita),
+                Slatkis("Beli kolac", 520, "RSD", 520, R.drawable.belikolac),
+                Slatkis("Tri leće kolac", 540, "RSD", 540, R.drawable.trilece),
+                Slatkis("Malina kolac", 520, "RSD", 520, R.drawable.malinakolac),
+                Slatkis("Princes krofna", 480, "RSD", 480, R.drawable.princeskrofna),
+                Slatkis("Krempita", 480, "RSD", 480, R.drawable.krempita),
                 Slatkis("Tiramisu", 540, "RSD", 460, R.drawable.tiramisu)
             )
             saveList(KEY_KOLACI, kolaci)
@@ -66,6 +68,13 @@ class SharedPreferencesHelper(context: Context) {
                 adresa = "Vojvode Misica 15, Novi Sad"
             )
             saveKorisnik(korisnik)
+
+            // Predefined list of komentari
+            val komentari = listOf(
+                Komentar("Torta je kremasta i ukusna."),
+                Komentar("Odličan izbor za proslave.")
+            )
+            saveList(KEY_OBAVESTENJA, obavestenja)
 
             // Mark the first launch as completed
             sharedPreferences.edit().putBoolean(KEY_FIRST_LAUNCH, false).apply()
@@ -89,6 +98,7 @@ class SharedPreferencesHelper(context: Context) {
     fun getTorte(): List<Slatkis> = getList(KEY_TORTE)
     fun getObavestenja(): List<Obavestenje> = getList(KEY_OBAVESTENJA)
     fun getKolaci(): List<Slatkis> = getList(KEY_KOLACI)
+    fun getKomentari(): List<Komentar> = getList(KEY_KOMENTARI)
 
     // Function to add one more Obavestenje to the list
     fun addObavestenje(obavestenje: Obavestenje) {

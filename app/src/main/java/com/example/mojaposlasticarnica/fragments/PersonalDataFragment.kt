@@ -9,16 +9,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
+import com.example.mojaposlasticarnica.MainActivity
 import com.example.mojaposlasticarnica.R
 import com.example.mojaposlasticarnica.data.SharedPreferencesHelper
 import com.example.mojaposlasticarnica.model.Korisnik
+import com.example.mojaposlasticarnica.model.Obavestenje
+import com.example.mojaposlasticarnica.utils.getCurrentDate
 
-
-/**
- * A simple [Fragment] subclass.
- * Use the [PersonalDataFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PersonalDataFragment : Fragment() {
 
     var korisnik: Korisnik? =  null
@@ -30,28 +27,50 @@ class PersonalDataFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_personal_data, container, false)
          korisnik =  SharedPreferencesHelper(requireContext()).getKorisnik()
 
+        val editTextKorisnickoIme: EditText = view.findViewById(R.id.usernamelabel)
+        korisnik?.let {
+            editTextKorisnickoIme.setText(it.korisnickoIme)
+        }
 
-        val editTextIme: EditText = view.findViewById(R.id.usernamelabel)
+        val editTextIme: EditText = view.findViewById(R.id.namelabel)
         korisnik?.let {
             editTextIme.setText(it.ime)
+        }
 
+        val editTextPrezime: EditText = view.findViewById(R.id.lastnamelabel)
+        korisnik?.let {
+            editTextIme.setText(it.prezime)
+        }
+
+        val editTextTelefon: EditText = view.findViewById(R.id.phonelabel)
+        korisnik?.let {
+            editTextIme.setText(it.kontaktTelefon)
+        }
+
+        val editTextAdresa: EditText = view.findViewById(R.id.addresslabel)
+        korisnik?.let {
+            editTextIme.setText(it.adresa)
         }
 
         val buttonEditPersonalData: Button = view.findViewById(R.id.personal_button)
         val buttonChangePassword: Button = view.findViewById(R.id.password_button)
 
         buttonEditPersonalData.setOnClickListener {
-           //TODO: uzmes sve podatke iz view-a i sacuvas u SharedPrefs
-            val korisnickoIme = editTextIme.text.toString()
+           //uzmemo sve podatke iz view-a i sacuvamo u SharedPrefs
+            val korisnickoIme = editTextKorisnickoIme.text.toString()
+            val ime = editTextIme.text.toString()
+            val prezime = editTextPrezime.text.toString()
+            val kontaktTelefon = editTextTelefon.text.toString()
+            val adresa = editTextAdresa.text.toString()
+
             korisnik?.let {
-                val noviKorisnik = Korisnik(korisnickoIme = korisnickoIme, lozinka = it.lozinka,"","", "", "")
+                val noviKorisnik = Korisnik(korisnickoIme = it.korisnickoIme, lozinka = it.lozinka, ime = it.ime, prezime = it.prezime, kontaktTelefon = it.kontaktTelefon, adresa = it.adresa)
                 SharedPreferencesHelper(requireContext()).saveKorisnik(noviKorisnik)
             }
-
-
         }
 
         buttonChangePassword.setOnClickListener {
+            SharedPreferencesHelper(requireContext()).addObavestenje(Obavestenje("Uspešno ste izmenili lične podatke.", getCurrentDate()))
             navigateToFragment(ChangePasswordFragment())
         }
 
@@ -70,6 +89,11 @@ class PersonalDataFragment : Fragment() {
         }
     }
 
+    private fun notifyPersonalDataChangeSuccess() {
+        val notificationFragment = (activity as? MainActivity)?.getNotificationFragment()
+        notificationFragment?.dodajObavestenje("Uspešno ste promenili lične podatke.")
+    }
+
     private fun navigateToFragment(fragment: Fragment) {
         parentFragmentManager.beginTransaction()
             .replace(R.id.fl_content, fragment)
@@ -77,5 +101,9 @@ class PersonalDataFragment : Fragment() {
             .commit()
     }
 
-
+    //parentFragmentManager je menadžer koji upravlja fragmentima u okviru roditeljskog fragmenta; započinje novu transakciju fragmenta
+    //Metod replace zamenjuje fragment koji se trenutno nalazi u okviru R.id.fl_content sa novim fragmentom koji je prosleđen kao argument
+    //R.id.fl_content je ID kontejnera u koji će novi fragment biti postavljen. U ovom slučaju, kontejner je FrameLayout ili bilo koji drugi ViewGroup sa ID-jem fl_content
+    //addToBackStack(null): Ova linija dodaje transakciju na povratni stek, omogućavajući korisniku da se vrati na prethodni fragment pritiskom na dugme za povratak. Ako prosledite null kao argument, to znači da se koristi podrazumevano ime za povratnu transakciju
+    //Metod commit potvrđuje transakciju i čini promene. Nakon poziva ovog metoda, zamena fragmenta će biti izvršena
 }

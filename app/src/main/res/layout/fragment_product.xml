@@ -81,8 +81,8 @@
 
     <Button
         android:id="@+id/dodavanjeUKorpu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="110dp"
+        android:layout_height="40dp"
         android:text="Dodaj u korpu"
         android:textColor="@color/black"
         android:background="#E8D159"
@@ -106,14 +106,17 @@
         android:layout_marginLeft="40dp"
         android:gravity="center"/>
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewKomentari"
         android:layout_width="150dp"
-        android:layout_height="80dp"
-        android:background="#FFF7DC"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/komentariDrugihKorisnika"
-        android:layout_marginLeft="40dp"/>
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="#FFF7DC"/>
 
     <EditText
+        android:id="@+id/editTextKomentar"
         android:layout_width="150dp"
         android:layout_height="100dp"
         android:background="@color/white"
@@ -122,6 +125,20 @@
         android:layout_marginTop="50dp"
         android:layout_marginLeft="240dp"
         android:textColor="#9A9A9A"/>
+
+    <Button
+        android:id="@+id/buttonDodajKomentar"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/editTextKomentar"
+        android:layout_toRightOf="@+id/recyclerViewKomentari"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="20dp"
+        android:background="#E8D159"
+        android:text="Ostavite Komentar"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:textSize="10dp"/>
 </RelativeLayout>
 
 </RelativeLayout>

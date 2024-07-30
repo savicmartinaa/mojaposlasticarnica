@@ -17,8 +17,6 @@ class LoginActivity : AppCompatActivity() {
         button.setOnClickListener {
             prijavaNaSistem()
         }
-
-
         otvoriMainActivity()  //ovo odkomentarusem za kucanje i proveru lozinke i kor imena
     }
 
