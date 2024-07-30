@@ -38,8 +38,8 @@ class SweetsFragment : Fragment() {
         return inflatedView
     }
     private fun openDetailsFragment(slatkis: Slatkis) {
-        val fragment = ProductFragment.newInstance(slatkis)
-        val ft: FragmentTransaction =parentFragmentManager.beginTransaction()
-        ft.add(R.id.fl_content, fragment).commit()
+       // val fragment = ProductFragment.newInstance(slatkis)
+       // val ft: FragmentTransaction =parentFragmentManager.beginTransaction()
+      //  ft.add(R.id.fl_content, fragment).commit()
     }
 }
