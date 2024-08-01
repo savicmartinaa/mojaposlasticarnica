@@ -17,12 +17,21 @@ import com.example.mojaposlasticarnica.data.SharedPreferencesHelper
 import com.example.mojaposlasticarnica.model.Slatkis
 import com.google.gson.Gson
 
+private const val ARG_PARAM1 = "param1"
 class ProductFragment : Fragment() {
 
    /* private lateinit var recyclerViewKomentari: RecyclerView
     private lateinit var komentarAdapter: KomentarAdapter
     private val komentari: MutableList<String> = mutableListOf()*/
+   private var mSlatkis: Slatkis? = null
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            mSlatkis = Gson().fromJson(it.getString(ARG_PARAM1), Slatkis::class.java)
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -58,4 +67,23 @@ class ProductFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflatedView
 }
+    companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment ProductFragment.
+         */
+        // TODO: Rename and change types and number of parameters
+        @JvmStatic
+        fun newInstance(slatkis: Slatkis) =
+            ProductFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_PARAM1, Gson().toJson(slatkis))
+                }
+            }
+    }
+
 }

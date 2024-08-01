@@ -118,5 +118,11 @@ class SharedPreferencesHelper(context: Context) {
         val json = sharedPreferences.getString(KEY_KORISNIK, null) ?: return null
         return gson.fromJson(json, Korisnik::class.java)
     }
+
+    fun clearAllSharedPreferences() {
+        val editor = sharedPreferences.edit()
+        editor.clear()
+        editor.apply() // or editor.commit() if you want to do it synchronously
+    }
 }
 
