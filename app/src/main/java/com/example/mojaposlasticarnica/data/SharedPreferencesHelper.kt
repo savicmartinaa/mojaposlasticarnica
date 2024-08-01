@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.example.mojaposlasticarnica.R
 import com.example.mojaposlasticarnica.model.Komentar
 import com.example.mojaposlasticarnica.model.Korisnik
+import com.example.mojaposlasticarnica.model.KorpaProizvod
 import com.example.mojaposlasticarnica.model.Obavestenje
 import com.example.mojaposlasticarnica.model.Slatkis
 import com.google.gson.Gson
@@ -24,6 +25,8 @@ class SharedPreferencesHelper(context: Context) {
         private const val KEY_KORISNIK = "com.example.mojaposlasticarnica.KORISNIK"
         private const val KEY_FIRST_LAUNCH = "com.example.mojaposlasticarnica.FIRST_LAUNCH"
         private const val KEY_KOMENTARI = "com.example.mojaposlasticarnica.KOMENTARI"
+        private const val KEY_KORPA = "com.example.mojaposlasticarnica.KORPA"
+
     }
 
     // Initialize the data if it's the first launch
@@ -32,12 +35,12 @@ class SharedPreferencesHelper(context: Context) {
         if (isFirstLaunch) {
             // Predefined list of torte
             val torte = listOf(
-                Slatkis("Badem torta", 570, "RSD", 480, R.drawable.badem, opisProizvoda = "fndsafnksjn"),
-                Slatkis("Oreo torta", 520, "RSD", 450, R.drawable.oreo, "dfhdsfkads"),
-                Slatkis("Kapri torta", 540, "RSD", 540, R.drawable.kapri),
-                Slatkis("Beli anđeo torta", 520, "RSD", 450, R.drawable.beli_andjeo),
-                Slatkis("Baron torta", 540, "RSD", 540, R.drawable.baron),
-                Slatkis("Cheese cake", 540, "RSD", 540, R.drawable.cheese_cake)
+                Slatkis("Badem torta", 570, "RSD", 480, R.drawable.badem, opisProizvoda = "Martina, dodaj svuda opise proizvoda"),
+                Slatkis("Oreo torta", 520, "RSD", 450, R.drawable.oreo, "Martina, dodaj svuda opise proizvoda"),
+                Slatkis("Kapri torta", 540, "RSD", 540, R.drawable.kapri,  "Martina, dodaj svuda opise proizvoda"),
+                Slatkis("Beli anđeo torta", 520, "RSD", 450, R.drawable.beli_andjeo, "Martina, dodaj svuda opise proizvoda"),
+                Slatkis("Baron torta", 540, "RSD", 540, R.drawable.baron, "Martina, dodaj svuda opise proizvoda"),
+                Slatkis("Cheese cake", 540, "RSD", 540, R.drawable.cheese_cake, "Martina, dodaj svuda opise proizvoda")
             )
             saveList(KEY_TORTE, torte)
 
@@ -71,10 +74,10 @@ class SharedPreferencesHelper(context: Context) {
 
             // Predefined list of komentari
             val komentari = listOf(
-                Komentar("Torta je kremasta i ukusna."),
-                Komentar("Odličan izbor za proslave.")
+                Komentar(komentar = "Torta je kremasta i ukusna."),
+                Komentar(komentar = "Odličan izbor za proslave.")
             )
-            saveList(KEY_OBAVESTENJA, obavestenja)
+            saveList(KEY_KOMENTARI, komentari)
 
             // Mark the first launch as completed
             sharedPreferences.edit().putBoolean(KEY_FIRST_LAUNCH, false).apply()
@@ -100,6 +103,8 @@ class SharedPreferencesHelper(context: Context) {
     fun getKolaci(): List<Slatkis> = getList(KEY_KOLACI)
     fun getKomentari(): List<Komentar> = getList(KEY_KOMENTARI)
 
+    fun getKorpaProizvodi():  List<KorpaProizvod> = getList(KEY_KORPA)
+
     // Function to add one more Obavestenje to the list
     fun addObavestenje(obavestenje: Obavestenje) {
         val currentObavestenja = getObavestenja().toMutableList()
@@ -124,5 +129,33 @@ class SharedPreferencesHelper(context: Context) {
         editor.clear()
         editor.apply() // or editor.commit() if you want to do it synchronously
     }
+
+    fun vratiMiAktuelnePromocije(): List<List<Slatkis>> {
+        val lista = mutableListOf<List<Slatkis>>()
+
+        val listaKolacaSaPromocijom = mutableListOf<Slatkis>()
+        getKolaci().forEach {
+            if (it.isThereAPopust() && listaKolacaSaPromocijom.size<2)listaKolacaSaPromocijom.add(it)
+        }
+        val listaTortiSaPromocijom = mutableListOf<Slatkis>()
+        getTorte().forEach {
+            if (it.isThereAPopust() && listaTortiSaPromocijom.size<2)listaTortiSaPromocijom.add(it)
+        }
+        lista.add(0, listaKolacaSaPromocijom)
+        lista.add(1, listaTortiSaPromocijom)
+        return lista
+    }
+
+    fun dodajProizvodUKorpu(proizvod: KorpaProizvod){
+        val lista = getKorpaProizvodi()
+        val novaLista = lista.toMutableList()
+        novaLista.add(proizvod)
+        saveList(KEY_KORPA, novaLista)
+    }
+
+    fun sacuvajKorpu(korpaProizvodi: MutableList<KorpaProizvod>) {
+        saveList(KEY_KORPA, korpaProizvodi)
+    }
+
 }
 

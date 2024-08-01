@@ -7,13 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mojaposlasticarnica.R
 import com.example.mojaposlasticarnica.adapter.KorpaProizvodAdapter
-import com.example.mojaposlasticarnica.model.KorpaProizvod
+import com.example.mojaposlasticarnica.data.SharedPreferencesHelper
 
 
 class CartFragment : Fragment() {
@@ -34,14 +33,19 @@ class CartFragment : Fragment() {
         val inflatedView =  inflater.inflate(R.layout.fragment_cart, container, false)
         val recyclerView = inflatedView?.findViewById<RecyclerView>(R.id.recyclerViewCart)
 
-        val korpaProizvodi = listOf(
+
+        val korpaProizvodi = SharedPreferencesHelper(requireContext()).getKorpaProizvodi().toMutableList()
+       /* val korpaProizvodi = listOf(
             KorpaProizvod(R.drawable.malinakolac, "Malina kolač", 5, "2500 din"),
             KorpaProizvod(R.drawable.cheese_cake, "Cheese cake", 2, "1000 din")
-        )
+        )*/
 
         recyclerView?.let {
             it.layoutManager = LinearLayoutManager(activity)
-            it.adapter = KorpaProizvodAdapter(korpaProizvodi)
+            it.adapter = KorpaProizvodAdapter(korpaProizvodi){
+                korpaProizvodi.remove(it)
+                SharedPreferencesHelper(requireContext()).sacuvajKorpu(korpaProizvodi)
+            }
         }
 
         val buttonFinish: Button = inflatedView.findViewById(R.id.cartbutton)

@@ -2,13 +2,13 @@ package com.example.mojaposlasticarnica.fragments
 
 import android.content.DialogInterface
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import com.example.mojaposlasticarnica.MainActivity
 import com.example.mojaposlasticarnica.R
 import com.example.mojaposlasticarnica.data.SharedPreferencesHelper
@@ -18,60 +18,74 @@ import com.example.mojaposlasticarnica.utils.getCurrentDate
 
 class PersonalDataFragment : Fragment() {
 
-    var korisnik: Korisnik? =  null
+    var korisnik: Korisnik? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_personal_data, container, false)
-         korisnik =  SharedPreferencesHelper(requireContext()).getKorisnik()
+        SharedPreferencesHelper(requireContext()).getKorisnik()?.let { korisnik ->
 
-        val editTextKorisnickoIme: EditText = view.findViewById(R.id.usernamelabel)
-        korisnik?.let {
-            editTextKorisnickoIme.setText(it.korisnickoIme)
-        }
 
-        val editTextIme: EditText = view.findViewById(R.id.namelabel)
-        korisnik?.let {
-            editTextIme.setText(it.ime)
-        }
+            val editTextKorisnickoIme: EditText = view.findViewById(R.id.usernamelabel)
 
-        val editTextPrezime: EditText = view.findViewById(R.id.lastnamelabel)
-        korisnik?.let {
-            editTextIme.setText(it.prezime)
-        }
+            editTextKorisnickoIme.setText(korisnik.korisnickoIme)
 
-        val editTextTelefon: EditText = view.findViewById(R.id.phonelabel)
-        korisnik?.let {
-            editTextIme.setText(it.kontaktTelefon)
-        }
 
-        val editTextAdresa: EditText = view.findViewById(R.id.addresslabel)
-        korisnik?.let {
-            editTextIme.setText(it.adresa)
-        }
+            val editTextIme: EditText = view.findViewById(R.id.namelabel)
 
-        val buttonEditPersonalData: Button = view.findViewById(R.id.personal_button)
-        val buttonChangePassword: Button = view.findViewById(R.id.password_button)
+            editTextIme.setText(korisnik.ime)
 
-        buttonEditPersonalData.setOnClickListener {
-           //uzmemo sve podatke iz view-a i sacuvamo u SharedPrefs
-            val korisnickoIme = editTextKorisnickoIme.text.toString()
-            val ime = editTextIme.text.toString()
-            val prezime = editTextPrezime.text.toString()
-            val kontaktTelefon = editTextTelefon.text.toString()
-            val adresa = editTextAdresa.text.toString()
 
-            korisnik?.let {
-                val noviKorisnik = Korisnik(korisnickoIme = it.korisnickoIme, lozinka = it.lozinka, ime = it.ime, prezime = it.prezime, kontaktTelefon = it.kontaktTelefon, adresa = it.adresa)
+            val editTextPrezime: EditText = view.findViewById(R.id.lastnamelabel)
+
+            editTextIme.setText(korisnik.prezime)
+
+
+            val editTextTelefon: EditText = view.findViewById(R.id.phonelabel)
+
+            editTextIme.setText(korisnik.kontaktTelefon)
+
+
+            val editTextAdresa: EditText = view.findViewById(R.id.addresslabel)
+
+            editTextIme.setText(korisnik.adresa)
+
+
+            val buttonEditPersonalData: Button = view.findViewById(R.id.personal_button)
+            val buttonChangePassword: Button = view.findViewById(R.id.password_button)
+
+            buttonEditPersonalData.setOnClickListener {
+                //uzmemo sve podatke iz view-a i sacuvamo u SharedPrefs
+                val korisnickoIme = editTextKorisnickoIme.text.toString()
+                val ime = editTextIme.text.toString()
+                val prezime = editTextPrezime.text.toString()
+                val kontaktTelefon = editTextTelefon.text.toString()
+                val adresa = editTextAdresa.text.toString()
+
+
+                val noviKorisnik = Korisnik(
+                    korisnickoIme = korisnickoIme,
+                    lozinka = korisnik.lozinka,
+                    ime = ime,
+                    prezime = prezime,
+                    kontaktTelefon = kontaktTelefon,
+                    adresa = adresa
+                )
                 SharedPreferencesHelper(requireContext()).saveKorisnik(noviKorisnik)
-            }
-        }
 
-        buttonChangePassword.setOnClickListener {
-            SharedPreferencesHelper(requireContext()).addObavestenje(Obavestenje("Uspešno ste izmenili lične podatke.", getCurrentDate()))
-            navigateToFragment(ChangePasswordFragment())
+            }
+
+            buttonChangePassword.setOnClickListener {
+                SharedPreferencesHelper(requireContext()).addObavestenje(
+                    Obavestenje(
+                        "Uspešno ste izmenili lične podatke.",
+                        getCurrentDate()
+                    )
+                )
+                navigateToFragment(ChangePasswordFragment())
+            }
         }
 
         return view

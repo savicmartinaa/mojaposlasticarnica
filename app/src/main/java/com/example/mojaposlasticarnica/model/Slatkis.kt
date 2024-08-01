@@ -12,4 +12,10 @@ data class Slatkis(
         return if (cenaSaPopustom>0 && cenaSaPopustom<cena) true
         else false
     }
+
+    fun dajKonacnuCenu():Int{
+        return if (isThereAPopust()){
+            cenaSaPopustom
+        }else cena
+    }
 }

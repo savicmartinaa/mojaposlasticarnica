@@ -10,9 +10,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mojaposlasticarnica.R
 import com.example.mojaposlasticarnica.model.KorpaProizvod
+import com.example.mojaposlasticarnica.model.Slatkis
 
 
-class KorpaProizvodAdapter(private val proizvodiUKorpi: List<KorpaProizvod>) : RecyclerView.Adapter<KorpaProizvodAdapter.ViewHolder>(){
+class KorpaProizvodAdapter(private val proizvodiUKorpi: List<KorpaProizvod>, private val itemBrisanjeListener: (KorpaProizvod) -> Unit) : RecyclerView.Adapter<KorpaProizvodAdapter.ViewHolder>(){
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -48,7 +49,8 @@ class KorpaProizvodAdapter(private val proizvodiUKorpi: List<KorpaProizvod>) : R
         holder.cena.text = proizvodKorpa.cena
 
         holder.brisanje.setOnClickListener {
-
+            itemBrisanjeListener(proizvodKorpa)
+            notifyDataSetChanged()
         }
     }
 
