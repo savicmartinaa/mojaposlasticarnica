@@ -15,10 +15,10 @@ import com.example.mojaposlasticarnica.data.SharedPreferencesHelper
 import com.example.mojaposlasticarnica.model.Korisnik
 import com.example.mojaposlasticarnica.model.Obavestenje
 import com.example.mojaposlasticarnica.utils.getCurrentDate
+import com.example.mojaposlasticarnica.utils.showCustomDialog
 
 class PersonalDataFragment : Fragment() {
 
-    var korisnik: Korisnik? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,43 +27,30 @@ class PersonalDataFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_personal_data, container, false)
         SharedPreferencesHelper(requireContext()).getKorisnik()?.let { korisnik ->
 
-
+            // Find the EditText views
             val editTextKorisnickoIme: EditText = view.findViewById(R.id.usernamelabel)
-
-            editTextKorisnickoIme.setText(korisnik.korisnickoIme)
-
-
             val editTextIme: EditText = view.findViewById(R.id.namelabel)
-
-            editTextIme.setText(korisnik.ime)
-
-
             val editTextPrezime: EditText = view.findViewById(R.id.lastnamelabel)
-
-            editTextIme.setText(korisnik.prezime)
-
-
             val editTextTelefon: EditText = view.findViewById(R.id.phonelabel)
-
-            editTextIme.setText(korisnik.kontaktTelefon)
-
-
             val editTextAdresa: EditText = view.findViewById(R.id.addresslabel)
 
-            editTextIme.setText(korisnik.adresa)
-
+            // Set the text for each EditText
+            editTextKorisnickoIme.setText(korisnik.korisnickoIme)
+            editTextIme.setText(korisnik.ime)
+            editTextPrezime.setText(korisnik.prezime)
+            editTextTelefon.setText(korisnik.kontaktTelefon)
+            editTextAdresa.setText(korisnik.adresa)
 
             val buttonEditPersonalData: Button = view.findViewById(R.id.personal_button)
             val buttonChangePassword: Button = view.findViewById(R.id.password_button)
 
             buttonEditPersonalData.setOnClickListener {
-                //uzmemo sve podatke iz view-a i sacuvamo u SharedPrefs
+                // Get all data from views and save to SharedPrefs
                 val korisnickoIme = editTextKorisnickoIme.text.toString()
                 val ime = editTextIme.text.toString()
                 val prezime = editTextPrezime.text.toString()
                 val kontaktTelefon = editTextTelefon.text.toString()
                 val adresa = editTextAdresa.text.toString()
-
 
                 val noviKorisnik = Korisnik(
                     korisnickoIme = korisnickoIme,
@@ -73,8 +60,10 @@ class PersonalDataFragment : Fragment() {
                     kontaktTelefon = kontaktTelefon,
                     adresa = adresa
                 )
+
                 SharedPreferencesHelper(requireContext()).saveKorisnik(noviKorisnik)
 
+                requireContext().showCustomDialog("Uspesno promenjeni podaci")
             }
 
             buttonChangePassword.setOnClickListener {
@@ -90,6 +79,7 @@ class PersonalDataFragment : Fragment() {
 
         return view
     }
+
 
     private fun showPersonalDataChangeDialog() {
         activity?.let {

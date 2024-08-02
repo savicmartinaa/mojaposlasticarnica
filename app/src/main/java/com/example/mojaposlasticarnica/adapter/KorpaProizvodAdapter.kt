@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mojaposlasticarnica.R
 import com.example.mojaposlasticarnica.model.KorpaProizvod
-import com.example.mojaposlasticarnica.model.Slatkis
 
 
 class KorpaProizvodAdapter(private val proizvodiUKorpi: List<KorpaProizvod>, private val itemBrisanjeListener: (KorpaProizvod) -> Unit) : RecyclerView.Adapter<KorpaProizvodAdapter.ViewHolder>(){
@@ -39,11 +38,11 @@ class KorpaProizvodAdapter(private val proizvodiUKorpi: List<KorpaProizvod>, pri
         holder.labela.setText(proizvodKorpa.kolicina.toString())
 
         holder.plus_button.setOnClickListener {
-
+                incrementLabelValue(holder)
         }
 
         holder.minus_button.setOnClickListener {
-
+                decrementLabelValue(holder)
         }
 
         holder.cena.text = proizvodKorpa.cena
@@ -54,6 +53,18 @@ class KorpaProizvodAdapter(private val proizvodiUKorpi: List<KorpaProizvod>, pri
         }
     }
 
+
+    private fun incrementLabelValue(holder: ViewHolder) {
+        val currentValue = holder.labela.text.toString().toInt()
+        holder.labela.setText((currentValue + 1).toString())
+    }
+
+    private fun decrementLabelValue(holder: ViewHolder) {
+        val currentValue = holder.labela.text.toString().toInt()
+        if (currentValue > 1) {
+            holder.labela.setText((currentValue - 1).toString())
+        }
+    }
     override fun getItemCount(): Int = proizvodiUKorpi.size
 }
 
